@@ -28,4 +28,16 @@ renderTopics = () => {
     topicContainer.appendChild(topics);
 }
 
+createTopics = (topicData) => {
+    const fragment = document.createDocumentFragment();
+
+    topicData.forEach((data => {
+        const topic = createTopic(data);
+        fragment.appendChild(topic);
+    }));
+    return fragment;
+}
+
+
+
 document.querySelector("#submit-topic").addEventListener("click");
