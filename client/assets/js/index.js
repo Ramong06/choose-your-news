@@ -31,11 +31,24 @@ renderTopics = () => {
 createTopics = (topicData) => {
     const fragment = document.createDocumentFragment();
 
-    topicData.forEach((data => {
+    topicData.forEach((data) => {
         const topic = createTopic(data);
         fragment.appendChild(topic);
-    }));
+    });
     return fragment;
+}
+
+function createTopic({ name, id }) {
+    return createElement(
+        "div",
+        { class: "topic" },
+        createElement(
+            "button",
+            { "aria-label": "Close", "data-id": id, onClick: handleTopicDelete },
+            "x"
+        ),
+        createElement("a", { href: `topic.html?query=${name}` }, name)
+    );
 }
 
 
