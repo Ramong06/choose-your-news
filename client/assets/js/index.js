@@ -51,6 +51,11 @@ function createTopic({ name, id }) {
     );
 }
 
+function handleTopicDelete(event) {
+    const id = Number(event.target.getAttribute("data-id"));
+    topicData = topicData.filter((topic) => topic.id !== id);
 
+    renderTopics();
+}
 
 document.querySelector("#submit-topic").addEventListener("click");
