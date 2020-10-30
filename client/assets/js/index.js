@@ -74,4 +74,21 @@ function handleTopicAdd(event) {
     renderTopics();
 }
 
+function createElement(type, attributes, ...children) {
+    const element = document.createElement(type);
+
+    if (typeof attributes === "object") {
+        for (const key in attributes) {
+            if (key.startsWith("on")) {
+                const event = key.substring(2).toLowerCase();
+                const handler = attributes[key];
+
+                element.addEventListener(event, handler);
+            } else {
+                element.setAttribute(key, attributes[key]);
+            }
+        }
+    }
+    
+}
 document.querySelector("#submit-topic").addEventListener("click");
