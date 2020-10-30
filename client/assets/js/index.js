@@ -58,4 +58,20 @@ function handleTopicDelete(event) {
     renderTopics();
 }
 
+function handleTopicAdd(event) {
+    event.preventDefault();
+    const input = document.querySelector("#add-topic");
+    const value = input.value.trim();
+
+    if (!value) {
+        return;
+    }
+
+    topicData = [...topicData, { id: ++lastId, name: value }];
+
+    input.value = "";
+
+    renderTopics();
+}
+
 document.querySelector("#submit-topic").addEventListener("click");
