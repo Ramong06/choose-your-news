@@ -89,6 +89,20 @@ function createElement(type, attributes, ...children) {
             }
         }
     }
-    
+    children.forEach((child) => {
+        if (typeof child === "boolean" || child === null || child === undefined) {
+            return;
+        }
+
+        let node;
+        if (child instanceof HTMLElement) {
+            node = child;
+        } else {
+            node = document.createTextNode(child);
+        }
+    });
+    return element;
 }
+renderTopics();
+
 document.querySelector("#submit-topic").addEventListener("click");
