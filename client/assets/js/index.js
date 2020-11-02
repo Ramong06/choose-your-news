@@ -1,4 +1,4 @@
-let = topicData = [{
+let topicData = [{
     id: 1,
     name: "Politics"
 },
@@ -17,6 +17,7 @@ let = topicData = [{
 
 let lastId = 4;
 
+//Empty topic container, render topics
 renderTopics = () => {
     const topicContainer = document.querySelector(".topic-container");
     const topics = createTopics(topicData);
@@ -28,6 +29,7 @@ renderTopics = () => {
     topicContainer.appendChild(topics);
 }
 
+//return HTML for each topic provided
 createTopics = (topicData) => {
     const fragment = document.createDocumentFragment();
 
@@ -38,6 +40,7 @@ createTopics = (topicData) => {
     return fragment;
 }
 
+//return markup for each object
 function createTopic({ name, id }) {
     return createElement(
         "div",
@@ -51,6 +54,7 @@ function createTopic({ name, id }) {
     );
 }
 
+// Deletes a topic of click
 function handleTopicDelete(event) {
     const id = Number(event.target.getAttribute("data-id"));
     topicData = topicData.filter((topic) => topic.id !== id);
@@ -73,36 +77,8 @@ function handleTopicAdd(event) {
 
     renderTopics();
 }
-
-function createElement(type, attributes, ...children) {
-    const element = document.createElement(type);
-
-    if (typeof attributes === "object") {
-        for (const key in attributes) {
-            if (key.startsWith("on")) {
-                const event = key.substring(2).toLowerCase();
-                const handler = attributes[key];
-
-                element.addEventListener(event, handler);
-            } else {
-                element.setAttribute(key, attributes[key]);
-            }
-        }
-    }
-    children.forEach((child) => {
-        if (typeof child === "boolean" || child === null || child === undefined) {
-            return;
-        }
-
-        let node;
-        if (child instanceof HTMLElement) {
-            node = child;
-        } else {
-            node = document.createTextNode(child);
-        }
-    });
-    return element;
-}
+//renders topics on page load
 renderTopics();
 
+//handle new topic submissions on click
 document.querySelector("#submit-topic").addEventListener("click");
