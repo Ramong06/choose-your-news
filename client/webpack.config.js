@@ -28,8 +28,8 @@ const config = {
     },
     plugins: [
         new WebpackPwaManifest({
-            name: 'Newsy app',
-            short_name: 'Newsy',
+            name: 'Choose Your News app',
+            short_name: 'Choose',
             description:
                 'An application that allows you to view different news articles and save your favorites.',
             background_color: '#01579b',

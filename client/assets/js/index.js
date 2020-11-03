@@ -1,84 +1,92 @@
-let topicData = [{
+import { createElement } from "./domMethods";
+// Setting up dummy topics data
+let topicData = [
+  {
     id: 1,
     name: "Politics"
-},
-{
+  },
+  {
     id: 2,
-    name: "Enviornment"
-},
-{
+    name: "Environment"
+  },
+  {
     id: 3,
     name: "Sports"
-},
-{
+  },
+  {
     id: 4,
     name: "Entertainment"
-    }];
+  }
+];
 
 let lastId = 4;
 
-//Empty topic container, render topics
-renderTopics = () => {
-    const topicContainer = document.querySelector(".topic-container");
-    const topics = createTopics(topicData);
+// Empty topic container, render topics
+function renderTopics() {
+  const topicContainer = document.querySelector(".topic-container");
+  const topics = createTopics(topicData);
 
-    while (topicContainer.firstChild) {
-        topicContainer.removeChild(topicContainer.firstChild);
-    }
+  while (topicContainer.firstChild) {
+    topicContainer.removeChild(topicContainer.firstChild);
+  }
 
-    topicContainer.appendChild(topics);
+  topicContainer.appendChild(topics);
 }
 
-//return HTML for each topic provided
-createTopics = (topicData) => {
-    const fragment = document.createDocumentFragment();
+// Return HTML for each topic provided
+function createTopics(topicData) {
+  const fragment = document.createDocumentFragment();
 
-    topicData.forEach((data) => {
-        const topic = createTopic(data);
-        fragment.appendChild(topic);
-    });
-    return fragment;
+  topicData.forEach(data => {
+    const topic = createTopic(data);
+    fragment.appendChild(topic);
+  });
+
+  return fragment;
 }
 
-//return markup for each object
+// Return markup for a topic object
 function createTopic({ name, id }) {
-    return createElement(
-        "div",
-        { class: "topic" },
-        createElement(
-            "button",
-            { "aria-label": "Close", "data-id": id, onClick: handleTopicDelete },
-            "x"
-        ),
-        createElement("a", { href: `topic.html?query=${name}` }, name)
-    );
+  return createElement(
+    "div",
+    { class: "topic" },
+    createElement(
+      "button",
+      { "aria-label": "Close", "data-id": id, onClick: handleTopicDelete },
+      "×"
+    ),
+    createElement("a", { href: `topic.html?query=${name}` }, name)
+  );
 }
 
-// Deletes a topic of click
+// Deletes a topic on click
 function handleTopicDelete(event) {
-    const id = Number(event.target.getAttribute("data-id"));
-    topicData = topicData.filter((topic) => topic.id !== id);
+  const id = Number(event.target.getAttribute("data-id"));
 
-    renderTopics();
+  topicData = topicData.filter(topic => topic.id !== id);
+
+  renderTopics();
 }
 
 function handleTopicAdd(event) {
-    event.preventDefault();
-    const input = document.querySelector("#add-topic");
-    const value = input.value.trim();
+  event.preventDefault();
 
-    if (!value) {
-        return;
-    }
+  const input = document.querySelector("#add-topic");
+  const value = input.value.trim();
 
-    topicData = [...topicData, { id: ++lastId, name: value }];
+  if (!value) {
+    return;
+  }
 
-    input.value = "";
+  topicData = [...topicData, { id: ++lastId, name: value }];
 
-    renderTopics();
+  input.value = "";
+
+  renderTopics();
 }
-//renders topics on page load
+
+// Renders topics on page load
 renderTopics();
 
-//handle new topic submissions on click
-document.querySelector("#submit-topic").addEventListener("click");
+// Handle new topic submissions
+document.querySelector("#submit-topic").addEventListener("click", handleTopicAdd);
