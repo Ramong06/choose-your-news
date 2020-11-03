@@ -5,3 +5,12 @@ export function createArticleIds(articles) {
     return article;
   });
 }
+
+//returns URL query params as object
+export function getParams() {
+    return location.search.substring(1).split("&").reduce((acc, curr) => {
+        const [key, value] = curr.split("=");
+        acc[key] = value;
+        return acc;
+    }, {});
+}
