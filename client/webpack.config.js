@@ -29,7 +29,7 @@ const config = {
     plugins: [
         new WebpackPwaManifest({
             name: 'Choose Your News app',
-            short_name: 'Choose',
+            short_name: 'choose-your-news',
             description:
                 'An application that allows you to view different news articles and save your favorites.',
             background_color: '#01579b',
