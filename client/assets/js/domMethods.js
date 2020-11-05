@@ -1,4 +1,4 @@
-import { useIndexedDb } from "./indexedDb";
+import { useIndexedDb } from "./indexedDB";
 import { formatDate, getParams } from "./utils";
 
 //Clear the article container an dinser placeholder articles

@@ -1,4 +1,4 @@
-import { checkForIndexedDb, useIndexedDb } from "./indexedDb";
+import { checkForIndexedDb, useIndexedDb } from "./indexedDB";
 import { renderArticles } from "./domMethods";
 
 function loadPage() {

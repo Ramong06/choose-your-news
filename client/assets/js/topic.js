@@ -1,4 +1,4 @@
-import { useIndexedDb } from "./indexedDb";
+import { useIndexedDb } from "./indexedDB";
 import { loadArticles } from "./API";
 import { renderArticles } from "./domMethods";
 
